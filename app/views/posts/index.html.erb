@@ -21,6 +21,11 @@
                method: :delete,
                data: { confirm: 'Are you sure?' } %>
       </td>
+      <td><%= collection_check_boxes(:post, :category_ids, Category.all, :id, :title) do |cd| %>
+              <%= cd.check_box %>
+              <%= cd.label%></br>
+          <% end %>
+      </td>
     </tr>
   <% end %>
 </table>
