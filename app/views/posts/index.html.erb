@@ -14,20 +14,46 @@
     <tr>
       <td><%= post.title %></td>
       <td><%= post.description %></td>
-      <td><%= post.likes %></td>
+      <td class = "<%= "like-count-#{post.id}" %>"><%= post.likes %></td>
       <td><%= link_to 'Show', post_path(post) %></td>
-      <td type="button" name="Like" onclick="<% post.likes %>">Like</td>
+      <td type="button" name="Like" class="like-button" data-post-id="<%= post.id %>">Like</td>
       <td><%= link_to 'Delete', post_path(post),
                method: :delete,
                data: { confirm: 'Are you sure?' } %>
-      </td>
-      <td><%= collection_check_boxes(:post, :category_ids, Category.all, :id, :title) do |cd| %>
-              <%= cd.check_box %>
-              <%= cd.label%></br>
-          <% end %>
       </td>
     </tr>
   <% end %>
 </table>
 
 <p><%= link_to 'Add post', new_post_path %></p>
+
+<script>
+    const likeButtons = document.querySelectorAll('.like-button');
+
+    likeButtons.forEach(button => {
+      button.addEventListener('click', function () {
+        const postId = this.getAttribute('data-post-id');
+        likePost(postId);
+      });
+    });
+
+    function likePost(postId) {
+      fetch(`/posts/${postId}/like`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+        },
+      })
+      .then(response => response.json())
+      .then(data => {
+        const likeCountElement = document.querySelector(`.like-count-${postId}`);
+          likeCountElement.textContent = data.likes;
+        
+      })
+      .catch(error => {
+        console.error('Error liking post:', error);
+      });
+    }
+
+</script>

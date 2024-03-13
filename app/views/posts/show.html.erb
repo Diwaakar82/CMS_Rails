@@ -13,6 +13,12 @@
   <%= @post.likes %>
 </p>
 
+<p>
+  <strong>Categories:</strong>
+  <% @post.categories.each do |category| %>
+    <%= category.title %>
+  <% end %>
+</p>
 <p><%= link_to 'Edit', edit_post_path(@post) %></p>
 
 <h2>Comments:</h2>
