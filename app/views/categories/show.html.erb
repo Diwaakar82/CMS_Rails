@@ -6,9 +6,10 @@
       <div class="post-title">
         <%= link_to post.title, post_path(post) %>
       </div>
+
       <div class="post-actions">
-        <%= link_to 'Edit', edit_category_path(@category) %>
-        <%= link_to 'Delete', @category, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to 'Edit', edit_post_path(post) %>
+        <%= link_to 'Delete', post_path(post), method: :delete, data: { confirm: 'Are you sure?' } %>
       </div>
     </div>
   <% end %>
