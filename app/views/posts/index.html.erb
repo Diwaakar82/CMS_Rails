@@ -1,26 +1,23 @@
+<h1 class="category_title">Posts</h1>
 
-<h1>Posts</h1>
- 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Likes</th>
-    <th></th>
-  </tr>
- 
+<div class="post-container">
   <% @posts.each do |post| %>
-    <tr>
-      <td><%= post.title %></td>
-      <td><%= post.description %></td>
-      <td class = "<%= "like-count-#{post.id}" %>"><%= post.likes %></td>
-      <td><%= link_to 'Show', post_path(post) %></td>
-      <td type="button" name="Like" class=  "like-button" data-post-id="<%= post.id %>">Like</td>
-    </tr>
+    <div class="post">
+      <div class="post-title"><%= post.title %></div>
+      <div class="post-description"><%= post.description %></div>
+      <div class="post-likes like-count-<%= post.id %>">Likes: <%= post.likes %></div>
+      <div class="post-actions">
+        <%= link_to 'Show', post_path(post) %>
+        <div class="like-button" data-post-id="<%= post.id %>">Like</div>
+      </div>
+    </div>
   <% end %>
-</table>
+</div>
 
-<p><%= link_to 'Add post', new_post_path %></p>
+<p class="button-container">
+  <%= link_to 'Add post', new_post_path, class: "like-button" %>
+</p>
+
 
 <script>
     const likeButtons = document.querySelectorAll('.like-button');
@@ -43,7 +40,7 @@
       .then(response => response.json())
       .then(data => {
         const likeCountElement = document.querySelector(`.like-count-${postId}`);
-          likeCountElement.textContent = data.likes;
+          likeCountElement.textContent = "Likes: " + data.likes;
         
       })
       .catch(error => {

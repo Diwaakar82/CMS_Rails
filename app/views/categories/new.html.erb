@@ -1,12 +1,12 @@
-<h2>New Category</h2>
+<h2 class="category_title">New Category</h2>
 
-<%= form_with scope: :category, url: categories_path, local: true do |form| %>
-    <p>
-        <%= form.label :title %><br>
-        <%= form.text_field :title %>
-    </p>
+<%= form_with scope: :category, url: categories_path, local: true, html: { class: "category-form" } do |form| %>
+    <div class="form-group">
+        <%= form.label :title, class: "form-label" %><br>
+        <%= form.text_field :title, class: "form-control" %>
+    </div>
 
-    <p>
-        <%= form.submit %>
-    </p>
+    <div class="button-container">
+        <%= form.submit "Submit", class: "like-button" %>
+    </div>
 <% end %>

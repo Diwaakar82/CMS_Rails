@@ -1,60 +1,68 @@
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
- 
-<p>
-  <strong>Description:</strong>
-  <%= @post.description %>
-</p>
+<div class="post">
+  <h1>
+    <%= @post.title %>
+  </h1>
+   
+  <p>
+    <strong>Description:</strong>
+    <%= @post.description %>
+  </p>
+  
+  <p>
+    <strong>Likes:</strong>
+    <%= @post.likes %>
+  </p>
+  
+  <p>
+    <strong>Categories:</strong>
+    <% @post.categories.each do |category| %>
+      <%= category.title %>
+    <% end %>
+  </p>
 
-<p>
-  <strong>Likes:</strong>
-  <%= @post.likes %>
-</p>
 
-<p>
-  <strong>Categories:</strong>
-  <% @post.categories.each do |category| %>
-    <%= category.title %>
+  <div class="post-actions">
+    <%= link_to 'Edit', edit_post_path(@post), class: "links" %>
+    <%= link_to 'Delete', post_path(@post), method: :delete, data: { confirm: 'Are you sure?' }, class: "links" %>
+  </div>
+  <div class="post">
+    <h2>Comments:</h2>
+
+    <% @post.comments.each do |comment| %>
+      <div class="comment">
+        <p>
+          <strong>Commenter:</strong>
+          <%= comment.commenter %>
+        </p>
+      
+        <p>
+          <strong>Comment:</strong>
+          <%= comment.text %>
+        </p>
+      
+        <div class="comment-actions">
+          <%= link_to 'Delete', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' }, class: "links" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>  
+
+<div class="comment-form">
+  <h2>Add Comment:</h2>
+  <%= form_with(model: [@post, @post.comments.build], local: true) do |form| %>
+    <div class="form-group">
+      <%= form.label :commenter %><br>
+      <%= form.text_field :commenter, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :text %><br>
+      <%= form.text_area :text, class: "form-control" %>
+    </div>
+
+    <div class="button-container">
+      <%= form.submit "Submit", class: "like-button" %>
+    </div>
   <% end %>
-</p>
-<%= link_to 'Edit', edit_post_path(@post) %>
-<%= link_to 'Delete', post_path(@post),
-               method: :delete,
-               data: { confirm: 'Are you sure?' } %>
-
-<h2>Comments:</h2>
-<% @post.comments.each do |comment| %>
-  <p>
-    <strong>Commenter:</strong>
-    <%= comment.commenter %>
-  </p>
- 
-  <p>
-    <strong>Comment:</strong>
-    <%= comment.text %>
-  </p>
-
-  <p>
-  <%= link_to 'Delete', [comment.post, comment],
-               method: :delete,
-               data: { confirm: 'Are you sure?' } %>
-  </p>
-
-<% end %>
-
-<h2>Add Comment:</h2>
-<%= form_with(model: [ @post, @post.comments.build ], local: true) do |form| %>
-  <p>
-    <%= form.label :commenter %><br>
-    <%= form.text_field :commenter %>
-  </p>
-  <p>
-    <%= form.label :text %><br>
-    <%= form.text_area :text %>
-  </p>
-  <p>
-    <%= form.submit %>
-  </p>
-<% end %>
+</div>

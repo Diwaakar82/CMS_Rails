@@ -1,28 +1,37 @@
-<h2>Edit Post</h2>
+<div class="comment-form">
+    <h2>Edit Post</h2>
+    <%= form_with model: @post, local: true do |form| %>
+        <%= hidden_field_tag(:_method, :patch) %>
 
-<%= form_with model: @post, local: true do |form| %>
-    <%= hidden_field_tag(:_method, :patch) %>
+        <div class="form-group">
+            <%= form.label :title %><br>
+            <%= form.text_field :title, class: "form-control" %>
+        </div>
 
-    <p>
-        <%= form.label :title %><br>
-        <%= form.text_field :title %>
-    </p>
+        <div class="form-group">
+            <%= form.label :description %><br>
+            <%= form.text_field :description, class: "form-control" %>
+        </div>
 
-    <p>
-        <%= form.label :description %><br>
-        <%= form.text_field :description %>
-    </p>
+        <%= form.hidden_field :likes, value: @post.likes %>
 
-    <%= form.hidden_field :likes, value: @post.likes %>
-    
+       <div class="change-categories">
+            <div>Change categories</div>
+            </br>
+            <%= collection_check_boxes(:post, :category_ids, Category.all, :id, :title) do |cd| %>
+                <div class="checkbox-container">
+                <label class="custom-checkbox-label">
+                    <%= cd.check_box class: "custom-checkbox" %>
+                    <%# <span class="checkmark"></span> %>
+                    <%= cd.label %>
+                </label>
+                </div>
+            <% end %>
+        </div>
 
-    <p>Change categories</p>
-    <%= collection_check_boxes(:post, :category_ids, Category.all, :id, :title) do |cd| %>
-        <%= cd.check_box %>
-        <%= cd.label%></br>
+        </br>
+        <div class="button-container">
+            <%= form.submit "Submit", class: "like-button" %>
+        </div>
     <% end %>
-    
-    <p>
-        <%= form.submit %>
-    </p>
-<% end %>
+</div>

@@ -1,12 +1,14 @@
-<h2>Edit Category</h2>
+<div class="comment-form">
+    <h2>Edit Category</h2>
 
-<%= form_with(model: @category, local: true) do |form| %>
-    <p>
-        <%= form.label :title %><br>
-        <%= form.text_field :title %>
-    </p>
+    <%= form_with(model: @category, local: true) do |form| %>
+        <div class="form-group">
+            <%= form.label :title %><br>
+            <%= form.text_field :title, class: "form-control" %>
+        </div>
 
-    <p>
-        <%= form.submit %>
-    </p>
-<% end %>
+        <div class="button-container">
+            <%= form.submit "Submit", class:"like-button" %>
+        </div>
+    <% end %>
+</div>

@@ -1,22 +1,19 @@
-<p>
-  <strong>Title:</strong>
-  <%= @category.title %>
-</p>
+<h1 class="category_title"><%= @category.title %></h1>
 
-<table>
-  <tr>
-    <th>Post</th>
-    <th></th>
-  </tr>
-
+<div class="post-container">
   <% @category.posts.each do |post| %>
-    <tr>
-      <td><%= link_to post.title, post_path(post) %></td>
-      <td><%= link_to 'Edit', edit_category_path(@category) %></td>
-      <td><%= link_to 'Delete', @category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
+    <div class="post">
+      <div class="post-title">
+        <%= link_to post.title, post_path(post) %>
+      </div>
+      <div class="post-actions">
+        <%= link_to 'Edit', edit_category_path(@category) %>
+        <%= link_to 'Delete', @category, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </div>
+    </div>
   <% end %>
-</table>
+</div>
 
-
-<%= link_to 'Back', categories_path %>
+<div class="button-container">
+   <%= link_to 'Back', categories_path, class: "like-button" %>
+</div>

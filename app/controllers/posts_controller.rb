@@ -56,6 +56,10 @@ private
     def create_or_delete_posts_categories(post, categories)
         post.categories.destroy_all
 
+        unless categories
+            return
+        end
+        
         categories.each do |category|
             if category != ""
                 new_category = Category.find(category)
@@ -63,7 +67,6 @@ private
                 post.categories << Category.find_or_create_by(title: new_category[:title])
             end
         end
-        
     end
 
 
