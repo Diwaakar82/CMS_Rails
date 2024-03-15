@@ -1,0 +1,4 @@
+Try scss
+Change categories url
+Scroll for comments and posts
+Likes counter
