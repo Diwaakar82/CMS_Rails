@@ -8,6 +8,8 @@
 
 <br>
 
-<div class="button-container">
-    <%= link_to 'Add Category', new_category_path, class: "like-button" %>
-</div>
+<% if user_signed_in? %>
+    <div class="button-container">
+        <%= link_to 'Add Category', new_category_path, class: "like-button" %>
+    </div>
+<% end %>

@@ -1,6 +1,3 @@
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,6 +11,10 @@
 
   <body>
     <%= render "layouts/navbar" unless current_page?(root_path) %>
+    </br>
+    </br>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
     <%= yield %>
   </body>
 </html>

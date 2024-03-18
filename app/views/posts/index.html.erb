@@ -14,9 +14,11 @@
   <% end %>
 </div>
 
-<p class="button-container">
-  <%= link_to 'Add post', new_post_path, class: "like-button" %>
-</p>
+<% if user_signed_in? %>
+  <p class="button-container">
+    <%= link_to 'Add post', new_post_path, class: "like-button" %>
+  </p>
+<% end %>
 
 
 <script>

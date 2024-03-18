@@ -1,4 +1,7 @@
 class PostsController < ApplicationController
+    before_action :authenticate_user!, except: [:index, :show]
+    before_action :correct_user, only: [:edit, :update, :destroy]
+
     def index
         @posts = Post.all
     end
@@ -25,11 +28,11 @@ class PostsController < ApplicationController
     end
 
     def new
-        @post = Post.new
+        @post = current_user.posts.build
     end
     
     def create
-        @post = Post.new(post_params)
+        @post = current_user.posts.build(post_params)
         @post.likes = 0
         
         @post.save
@@ -52,6 +55,11 @@ class PostsController < ApplicationController
         end
     end
 
+    def correct_user
+        @post = current_user.posts.find_by(id: params[:id])
+        redirect_to posts_path, notice: "Not authorized" if @post.nil?
+    end
+
 private
     def create_or_delete_posts_categories(post, categories)
         post.categories.destroy_all
@@ -71,6 +79,6 @@ private
 
 
     def post_params
-        params.require(:post).permit(:title, :description, :likes, :category_ids => [])
+        params.require(:post).permit(:title, :description, :likes, :user_id)
     end
 end
