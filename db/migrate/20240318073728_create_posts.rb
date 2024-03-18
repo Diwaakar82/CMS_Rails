@@ -8,6 +8,6 @@ class CreatePosts < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    change_column_default :posts, :likes, 0
+    change_column_default :posts, :likes, from: nil, to: 0
   end
 end

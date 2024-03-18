@@ -1,4 +1,5 @@
 Try scss
+Add category selection to add post page
 Change categories url
 Scroll for comments and posts
 Likes counter
