@@ -1,5 +1,10 @@
 <h1 class="category_title"><%= @category.title %></h1>
 
+<div class="post-actions">
+    <%= link_to 'Edit', edit_category_path(@category), class: "links" %>
+    <%= link_to 'Delete', category_path(@category), method: :delete, data: { confirm: 'Are you sure?' }, class: "links" %>
+</div>
+
 <div class="post-container">
   <% @category.posts.each do |post| %>
     <div class="post">
