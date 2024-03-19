@@ -10,7 +10,7 @@
   </head>
 
   <body>
-    <%= render "layouts/navbar" unless current_page?(root_path) %>
+    <%= render "layouts/navbar" unless current_page?(:authenticated_root) %>
     </br>
     </br>
     <p class="notice"><%= notice %></p>

@@ -63,6 +63,10 @@
       <%= form.text_area :text, class: "form-control" %>
     </div>
 
+    <div class="form-group">
+        <%= form.number_field :user_id, id: :comment_user_id, class: "form-control", value: current_user.id, type: :hidden %>
+    </div>
+
     <div class="button-container">
       <%= form.submit "Submit", class: "like-button" %>
     </div>

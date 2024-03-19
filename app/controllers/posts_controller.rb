@@ -55,6 +55,10 @@ class PostsController < ApplicationController
         end
     end
 
+    def my_posts
+        @post = Post.find_by(user_id: params[:user_id])
+    end
+
     def correct_user
         @post = current_user.posts.find_by(id: params[:id])
         redirect_to posts_path, notice: "Not authorized" if @post.nil?
@@ -64,11 +68,13 @@ private
     def create_or_delete_posts_categories(post, categories)
         post.categories.destroy_all
         
-        categories.each do |category|
-            if category.present?
-                new_category = Category.find(category)
-    
-                post.categories << new_category
+        unless categories.nil?
+            categories.each do |category|
+                if category.present?
+                    new_category = Category.find(category)
+        
+                    post.categories << new_category
+                end
             end
         end
     end

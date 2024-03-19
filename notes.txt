@@ -1,7 +1,8 @@
 Try scss
-Add category selection to add post page
+Add category selection to add post page (Done)
 Change categories url
 Scroll for comments and posts
 Likes counter
 Add my posts page
 Move user related buttons to right
+Change comment deletion
