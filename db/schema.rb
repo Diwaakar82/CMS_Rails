@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_03_18_125732) do
+ActiveRecord::Schema.define(version: 2024_03_19_053334) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.string "title"
@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 2024_03_18_125732) do
   end
 
   create_table "categories_posts", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
-    t.bigint "Category_id", null: false
-    t.bigint "Post_id", null: false
+    t.bigint "category_id", null: false
+    t.bigint "post_id", null: false
   end
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|

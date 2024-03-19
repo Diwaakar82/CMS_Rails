@@ -14,6 +14,19 @@
     <div class="form-group">
         <%= form.number_field :user_id, id: :post_user_id, class: "form-control", value: current_user.id, type: :hidden %>
     </div>
+    
+    <div class="change-categories">
+        <div>Change categories</div>
+        </br>
+        <%= collection_check_boxes(:post, :category_ids, Category.all, :id, :title, :include_hidden => false ) do |cd| %>
+            <div class="checkbox-container">
+            <label class="custom-checkbox-label">
+                <%= cd.check_box class: "custom-checkbox" %>
+                <%= cd.label %>
+            </label>
+            </div>
+        <% end %>
+    </div>
 
     <div class="button-container">
         <%= form.submit "Submit",class: "like-button" %>

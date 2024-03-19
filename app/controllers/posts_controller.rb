@@ -20,7 +20,6 @@ class PostsController < ApplicationController
         if @post.update(post_params.except(:category_ids))
             create_or_delete_posts_categories(@post, post_params[:category_ids])
 
-            puts @post.categories
             redirect_to @post
         else
             render 'edit'
@@ -32,9 +31,10 @@ class PostsController < ApplicationController
     end
     
     def create
-        @post = current_user.posts.build(post_params)
+        @post = current_user.posts.new(post_params.except(:category_ids))
         @post.likes = 0
-        
+        create_or_delete_posts_categories(@post, post_params[:category_ids])
+
         @post.save
         redirect_to @post
     end
@@ -62,23 +62,19 @@ class PostsController < ApplicationController
 
 private
     def create_or_delete_posts_categories(post, categories)
-        post.categories.destroy_all
-
-        unless categories
-            return
-        end
+        post.categories.destroy
         
         categories.each do |category|
-            if category != ""
+            if category.present?
                 new_category = Category.find(category)
     
-                post.categories << Category.find_or_create_by(title: new_category[:title])
+                post.categories << new_category
             end
         end
     end
 
 
     def post_params
-        params.require(:post).permit(:title, :description, :likes, :user_id)
+        params.require(:post).permit(:title, :description, :likes, :user_id, :category_ids => [])
     end
 end
