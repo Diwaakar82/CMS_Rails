@@ -17,7 +17,7 @@ class PostsController < ApplicationController
     def update
         @post = Post.find(params[:id])
 
-        if @post.update(post_params.except(:category_ids))
+        if @post.update(post_params)
             create_or_delete_posts_categories(@post, post_params[:category_ids])
 
             redirect_to @post
@@ -31,7 +31,7 @@ class PostsController < ApplicationController
     end
     
     def create
-        @post = current_user.posts.new(post_params.except(:category_ids))
+        @post = current_user.posts.build(post_params)
         @post.likes = 0
         create_or_delete_posts_categories(@post, post_params[:category_ids])
 
@@ -62,7 +62,7 @@ class PostsController < ApplicationController
 
 private
     def create_or_delete_posts_categories(post, categories)
-        post.categories.destroy
+        post.categories.destroy_all
         
         categories.each do |category|
             if category.present?
