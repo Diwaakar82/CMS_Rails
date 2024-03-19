@@ -2,7 +2,7 @@
 
 <div class="categories">
     <% @categories.each do |category| %>
-        <%= link_to category.title, category_path(category), class: "links" %>
+        <%= link_to category.title, "/categories/posts/#{category.id}", class: "links" %>
     <% end %>
 </div>
 

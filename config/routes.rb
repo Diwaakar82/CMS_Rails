@@ -8,7 +8,10 @@ Rails.application.routes.draw do
 		resources :comments
 	end
 
-	resources :categories
+	resources :categories, except: [:show] do
+		get 'posts/:id', to: 'categories#show', on: :collection
+	end
+
 
   	get 'welcome/index'
 	get 'users/:user_id/my_posts', to: 'posts#my_posts'
