@@ -2,7 +2,12 @@
   <h1>
     <%= @post.title %>
   </h1>
-   
+  
+  <p>
+    <strong>Posted by:</strong>
+    <%= User.find_by(id: @post.user_id).username %>
+  </p>
+
   <p>
     <strong>Description:</strong>
     <%= @post.description %>
