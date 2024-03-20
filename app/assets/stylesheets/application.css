@@ -83,18 +83,18 @@ body
 .category_title
 {
   text-align: center;
-  margin: 50px 0px 50px 0px;
+  margin-top: 50px;
 }
 
 .categories
 {
   display: flex;
-  flex-direction: column ;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 20px 300px 20px 300px;
   overflow-y: auto;
-  height: 200px;
+  max-height: 250px;
 }
 
 .links

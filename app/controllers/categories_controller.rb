@@ -9,6 +9,7 @@ class CategoriesController < ApplicationController
   end
 
   def new
+    @category = current_user.posts.build
   end
 
   def edit
@@ -16,9 +17,12 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)
-    @category.save
 
-    redirect_to "/categories/posts/#{@category.id}"
+    if @category.save
+      redirect_to "/categories/posts/#{@category.id}"
+    else
+      render 'new'
+    end
   end
 
   def update
