@@ -9,8 +9,8 @@
   </p>
   
   <p>
-    <strong>Likes:</strong>
-    <%= @post.likes %>
+    <%= (@post.likes.count) == 1 ? 'Like:' : 'Likes:'%>
+    <%= @post.likes.count %> 
   </p>
   
   <p>

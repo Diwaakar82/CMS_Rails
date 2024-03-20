@@ -32,7 +32,7 @@ class PostsController < ApplicationController
     
     def create
         @post = current_user.posts.build(post_params)
-        @post.likes = 0
+        # @post.likes = 0
         create_or_delete_posts_categories(@post, post_params[:category_ids])
 
         if @post.save
