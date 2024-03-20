@@ -1,15 +1,22 @@
 <h1 class="category_title">Posts</h1>
 
 <div class="post-container">
-  <% @posts.each do |post| %>
-    <%# <% if current_user.user_id ==  %> %>
+  <% user = User.find_by_id(params[:user_id]) %>
+  <% user.posts.each do |post| %>
     <div class="post">
       <div class="post-title"><%= post.title %></div>
       <div class="post-description"><%= post.description %></div>
-      <div class="post-likes like-count-<%= post.id %>">Likes: <%= post.likes %></div>
+      <div><%= (post.likes.count) == 1 ? 'Like:' : 'Likes:'%><%= post.likes.count %></div>
       <div class="post-actions">
         <%= link_to 'Show', post_path(post) %>
-        <div class="like-button" data-post-id="<%= post.id %>">Like</div>
+        <div class="like-button">
+          <% pre_like = post.likes.find { |like| like.user_id == current_user.id} %>
+          <% if pre_like %>
+            <%= button_to 'Unlike', post_like_path(post, pre_like), method: :delete %>
+          <% else %>
+            <%= button_to 'Like', post_likes_path(post), method: :post %>
+          <% end %>
+        </div>
       </div>
     </div>
   <% end %>
