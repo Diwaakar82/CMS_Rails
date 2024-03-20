@@ -32,7 +32,6 @@ class PostsController < ApplicationController
     
     def create
         @post = current_user.posts.build(post_params)
-        # @post.likes = 0
         create_or_delete_posts_categories(@post, post_params[:category_ids])
 
         if @post.save
@@ -47,15 +46,6 @@ class PostsController < ApplicationController
         @post.destroy
 
         redirect_to posts_path
-    end
-
-    def like
-        @post = Post.find(params[:id])
-        @post.increment!(:likes) if @post
-    
-        respond_to do |format|
-          format.json { render json: { likes: @post.likes } }
-        end
     end
 
     def my_posts
@@ -84,6 +74,6 @@ private
 
 
     def post_params
-        params.require(:post).permit(:title, :description, :likes, :user_id, :category_ids => [])
+        params.require(:post).permit(:title, :description, :user_id, :category_ids => [])
     end
 end
