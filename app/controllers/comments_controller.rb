@@ -1,11 +1,21 @@
 class CommentsController < ApplicationController
 	before_action :correct_user, only: [:edit, :update, :destroy]
 
+	def index
+		@post = Post.find(params[:post_id])
+		redirect_to post_path(@post)
+	end
+
     def create
 		@post = Post.find(params[:post_id])
-		@comment = @post.comments.create(comment_params)
-
-		redirect_to post_path(@post)
+		@comment = @post.comments.build(comment_params)
+		
+		if !@comment.commenter.nil? && !@comment.text.nil? && @comment.commenter.size > 0 && @comment.text.size > 0
+			@comment.save
+			redirect_to post_path(@post)
+		else
+			redirect_to post_path(@post), notice: 'Invalid comment'
+		end
  	end
 
 	def destroy

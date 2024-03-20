@@ -18,7 +18,7 @@ class CategoriesController < ApplicationController
     @category = Category.new(category_params)
     @category.save
 
-    redirect_to posts_categories_path(@category)
+    redirect_to "/categories/posts/#{@category.id}"
   end
 
   def update

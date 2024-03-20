@@ -35,8 +35,11 @@ class PostsController < ApplicationController
         @post.likes = 0
         create_or_delete_posts_categories(@post, post_params[:category_ids])
 
-        @post.save
-        redirect_to @post
+        if @post.save
+            redirect_to @post
+        else
+            render 'new'
+        end
     end
     
     def destroy

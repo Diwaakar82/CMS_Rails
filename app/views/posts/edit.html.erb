@@ -1,6 +1,19 @@
 <div class="comment-form">
     <h2>Edit Post</h2>
     <%= form_with model: @post, local: true do |form| %>
+        <% if @post.errors.any? %>
+            <div id="error_explanation">
+                <h2>
+                    <%= pluralize(@post.errors.count, "error") %> prohibited
+                    this post from being saved:
+                </h2>
+                <ul>
+                    <% @post.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                    <% end %>
+                </ul>
+            </div>
+        <% end %>
         <%= hidden_field_tag(:_method, :patch) %>
 
         <div class="form-group">
