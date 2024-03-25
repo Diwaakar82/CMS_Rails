@@ -1,3 +1,7 @@
+<div class="button-container", style="text-align: left;">
+   <%= link_to 'Back', categories_path, class: "like-button" %>
+</div>
+
 <h1 class="category_title"><%= @category.title %></h1>
 
 <div class="post-actions">
@@ -18,10 +22,6 @@
       </div>
     </div>
   <% end %>
-</div>
-
-<div class="button-container">
-   <%= link_to 'Back', categories_path, class: "like-button" %>
 </div>
 
 <%= render 'script' %>

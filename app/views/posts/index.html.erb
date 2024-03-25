@@ -1,3 +1,9 @@
+<% if user_signed_in? %>
+  <p class="button-container", style="text-align: right;">
+    <%= link_to 'Add post', new_post_path, class: "like-button" %>
+  </p>
+<% end %>
+
 <h1 class="category_title">Posts</h1>
 
 <div class="post-container">
@@ -23,13 +29,6 @@
     <% end %>
   <% end %>
 </div>
-
-<% if user_signed_in? %>
-  <p class="button-container">
-    <%= link_to 'Add post', new_post_path, class: "like-button" %>
-  </p>
-<% end %>
-
 
 <script>
     const likeButtons = document.querySelectorAll('.like-button');

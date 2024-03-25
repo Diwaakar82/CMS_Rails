@@ -1,3 +1,9 @@
+<% if user_signed_in? %>
+    <div class="button-container", style="text-align: right;">
+        <%= link_to 'Add Category', new_category_path, class: "like-button" %>
+    </div>
+<% end %>
+
 <h1 class="category_title">Categories</h1>
 
 <div class="categories">
@@ -5,13 +11,5 @@
         <%= link_to category.title, "/categories/posts/#{category.id}", class: "links" %>
     <% end %>
 </div>
-
-<br>
-
-<% if user_signed_in? %>
-    <div class="button-container">
-        <%= link_to 'Add Category', new_category_path, class: "like-button" %>
-    </div>
-<% end %>
 
 <%= render 'script' %>
