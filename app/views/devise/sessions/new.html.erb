@@ -24,3 +24,9 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
+
+<script>
+    document.querySelectorAll('.signin-nav').forEach(function(element) {
+        element.className += ' active'
+    });
+</script>
