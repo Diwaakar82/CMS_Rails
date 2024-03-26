@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 	end
 
 	resources :categories, except: [:show] do
-		get 'posts/:id', to: 'categories#show', on: :collection
+		get 'posts/:id', to: 'categories#show', on: :collection, as: :category_posts 
 	end
 
 

@@ -33,7 +33,7 @@ class CategoriesController < ApplicationController
 
   def update
     if @category.update(category_params)
-      redirect_to @category
+      redirect_to category_posts_categories_path(@category)
     else
       render 'edit'
     end
