@@ -1,6 +1,7 @@
 <h2 class="category_title">Edit Category</h2>
 
-<%= form_with scope: :category, url: categories_path, local: true, html: { class: "category-form" } do |form| %>
+
+<%= form_with(model: @category, url: category_path(@category), method: :patch, local: true, html: { class: "category-form" }) do |form| %>
     <% if @category.errors.any? %>
         <div id="error_explanation">
             <h2>
@@ -21,8 +22,9 @@
     </div>
 
     <div class="button-container">
-        <%= form.submit "Submit", class: "like-button" %>
+        <%= button_to "Submit", category_path(@category), method: :patch, class: "like-button" %>
     </div>
+    <input type="hidden" name="_method" value="patch">
 <% end %>
 
 <%= render 'script' %>

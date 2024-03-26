@@ -90,11 +90,10 @@ body
 {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  margin: 20px 300px 20px 300px;
+  margin: 0px 300px 20px 300px;
   overflow-y: auto;
-  max-height: 250px;
+  height: 300px;
 }
 
 .links
@@ -305,4 +304,19 @@ body
 .active
 {
   font-weight: bold;
+}
+
+.delete-button
+{
+  margin-bottom: 20px;
+  border: 2px solid black;
+  padding: 10px 20px;
+  background-color: #ff5157;
+  border-radius: 5px;
+}
+
+.delete-button:hover
+{
+  background-color: red;
+  color: white !important;
 }

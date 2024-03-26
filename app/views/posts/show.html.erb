@@ -33,7 +33,7 @@
 
   <div class="post-actions">
     <%= link_to 'Edit', edit_post_path(@post), class: "links" %>
-    <%= link_to 'Delete', post_path(@post), method: :delete, data: { confirm: 'Are you sure?' }, class: "links" %>
+    <%= link_to 'Delete', post_path(@post), method: :delete, data: { confirm: 'Are you sure?' }, class: "delete-button" %>
   </div>
 
   <div class="like-button">
@@ -84,7 +84,7 @@
         </p>
       
         <div class="comment-actions">
-          <%= link_to 'Delete', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' }, class: "links" %>
+          <%= link_to 'Delete', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' }, class: "delete-button" %>
         </div>
         </br>
       </div>
