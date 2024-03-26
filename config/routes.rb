@@ -23,4 +23,6 @@ Rails.application.routes.draw do
 			root 'devise/sessions#new', as: :unauthenticated_root
 		end
 	end
+
+	get '*path', to: 'application#page_not_found'
 end
