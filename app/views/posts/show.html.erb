@@ -1,5 +1,5 @@
 <div class="button-container", style="text-align: left;">
-   <%= link_to 'Back', posts_path, class: "like-button" %>
+   <%= link_to 'Back', request.referer.present? ? request.referer : posts_path, class: "like-button" %>
 </div>
 
 <div class="post">
