@@ -57,7 +57,7 @@ class CategoriesController < ApplicationController
       rescue ActiveRecord::RecordNotFound => e
         redirect_to '/500'
       rescue ActiveRecord::RecordNotUnique => e
-        redirect_to '/500', notice: "Category already exists"
+        redirect_to '/500'
       end
     end
 
