@@ -1,13 +1,12 @@
 class CommentsController < ApplicationController
 	before_action :correct_user, only: [:edit, :update, :destroy]
+	before_action :find_post, only: [:index, :create, :destroy]
 
 	def index
-		@post = Post.find(params[:post_id])
 		redirect_to post_path(@post)
 	end
 
     def create
-		@post = Post.find(params[:post_id])
 		@comment = @post.comments.build(comment_params)
 		
 		if !@comment.commenter.nil? && !@comment.text.nil? && @comment.commenter.size > 0 && @comment.text.size > 0
@@ -19,11 +18,13 @@ class CommentsController < ApplicationController
  	end
 
 	def destroy
-		@post = Post.find(params[:post_id])
-		@comment = @post.comments.find(params[:id])
-		@comment.destroy
-
-		redirect_to post_path(@post)
+		begin
+			@comment = @post.comments.find(params[:id])
+			@comment.destroy
+			redirect_to post_path(@post)
+		rescue ActiveRecord::RecordNotFound => e
+			redirect_to '/500'
+	  	end
 	end
 
 	def correct_user
@@ -37,4 +38,11 @@ private
 		params.require(:comment).permit(:commenter, :text, :user_id)
 	end
 
+	def find_post
+		begin
+			@post = Post.find(params[:post_id])
+		rescue ActiveRecord::RecordNotFound => e
+		  	redirect_to '/500'
+		end
+	end
 end

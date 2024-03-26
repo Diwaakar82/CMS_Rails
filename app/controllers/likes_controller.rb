@@ -23,11 +23,20 @@ class LikesController < ApplicationController
     
 private
     def find_post
-        @post = Post.find(params[:post_id])
+        begin
+            @post = Post.find(params[:post_id])
+        rescue ActiveRecord::RecordNotFound => e
+            redirect_to '/500'
+        end
+        
     end
 
     def find_like
-        @like = @post.likes.find(params[:id])
+        begin
+            @like = @post.likes.find(params[:id])
+        rescue ActiveRecord::RecordNotFound => e
+            redirect_to '/500'
+        end
      end
 
     def already_liked?

@@ -46,7 +46,11 @@ class CategoriesController < ApplicationController
 
   private
     def set_category
-      @category = Category.find(params[:id])
+      begin
+        @category = Category.find(params[:id])
+      rescue ActiveRecord::RecordNotFound => e
+        redirect_to '/500'
+      end
     end
 
     def category_params

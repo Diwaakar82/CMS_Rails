@@ -29,37 +29,6 @@
 </div>
 
 <script>
-    const likeButtons = document.querySelectorAll('.like-button');
-
-    likeButtons.forEach(button => {
-      button.addEventListener('click', function () {
-        const postId = this.getAttribute('data-post-id');
-        likePost(postId);
-      });
-    });
-
-    function likePost(postId) {
-      fetch(`/posts/${postId}/like`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
-        },
-      })
-      .then(response => response.json())
-      .then(data => {
-        const likeCountElement = document.querySelector(`.like-count-${postId}`);
-          likeCountElement.textContent = "Likes: " + data.likes;
-        
-      })
-      .catch(error => {
-        console.error('Error liking post:', error);
-      });
-    }
-
-</script>
-
-<script>
     document.querySelectorAll('.my-posts-nav').forEach(function(element) {
         element.className += ' active'
     });
