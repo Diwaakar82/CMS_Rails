@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
     before_action :authenticate_user!, except: [:index, :show]
     before_action :correct_user, only: [:edit, :update, :destroy]
+    before_action :find_post, only: [:show, :edit, :update, :destroy]
 
     def index
         @posts = Post.all
@@ -42,7 +43,6 @@ class PostsController < ApplicationController
     end
     
     def destroy
-        @post = Post.find(params[:id])
         @post.destroy
 
         redirect_to posts_path
@@ -72,8 +72,15 @@ private
         end
     end
 
-
     def post_params
         params.require(:post).permit(:title, :description, :user_id, :category_ids => [])
+    end
+
+    def find_post
+        begin 
+            @post = Post.find(params[:id])
+        rescue ActiveRecord::RecordNotFound => e
+            redirect_to '/500'
+        end
     end
 end
