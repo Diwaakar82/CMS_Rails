@@ -8,10 +8,6 @@ Rails.application.routes.draw do
 
 	resources :categories, except: [:show] do
 		get 'posts/:id', to: 'categories#show', on: :collection
-		member do
-			get :edit
-			patch :update
-		end
 	end
 
 

@@ -8,16 +8,12 @@ class PostsController < ApplicationController
     end
 
     def show
-        @post = Post.find(params[:id])
     end
     
     def edit
-        @post = Post.find(params[:id])
     end
 
     def update
-        @post = Post.find(params[:id])
-
         if @post.update(post_params)
             create_or_delete_posts_categories(@post, post_params[:category_ids])
 

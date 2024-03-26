@@ -1,7 +1,7 @@
 <h2 class="category_title">Edit Category</h2>
 
 
-<%= form_with(model: @category, url: category_path(@category), method: :patch, local: true, html: { class: "category-form" }) do |form| %>
+<%= form_with model: @category, method: :patch, local: true do |form| %>
     <% if @category.errors.any? %>
         <div id="error_explanation">
             <h2>

@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: %i[ show edit update destroy ]
+  before_action :set_category, only: [:show, :edit, :update, :destroy]
 
   def index
     @categories = Category.all
@@ -9,20 +9,26 @@ class CategoriesController < ApplicationController
   end
 
   def new
-    @category = current_user.posts.build
+    @category = Category.new
   end
 
   def edit
   end
 
   def create
-    @category = Category.new(category_params)
+    begin
+      @category = Category.new(category_params)
 
-    if @category.save
-      redirect_to "/categories/posts/#{@category.id}"
-    else
-      render 'new'
+      if @category.save
+        redirect_to "/categories/posts/#{@category.id}"
+      else
+        render 'new'
+      end
+    rescue ActiveRecord::RecordNotUnique => e
+      redirect_to '/500'
     end
+
+    
   end
 
   def update
@@ -50,6 +56,8 @@ class CategoriesController < ApplicationController
         @category = Category.find(params[:id])
       rescue ActiveRecord::RecordNotFound => e
         redirect_to '/500'
+      rescue ActiveRecord::RecordNotUnique => e
+        redirect_to '/500', notice: "Category already exists"
       end
     end
 
