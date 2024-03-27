@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+    include Authenticated
+
     before_action :configure_permitted_parameters, if: :devise_controller?
 
     def page_not_found

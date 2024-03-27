@@ -5,13 +5,14 @@
             <ul>
                 <li><%= link_to "Categories", categories_path, class:"category-nav" unless current_page?(:authenticated_root) %></li>
                 <li><%= link_to "Posts", posts_path, class:"post-nav" unless current_page?(:authenticated_root) %></li>
+                
                 <% if !user_signed_in? %>
-                    <li style="float: right;"><%= link_to "Sign Up", new_user_registration_path, class:"signup-nav" %></li>
-                    <li style="float: right;"><%= link_to "Sign In", new_user_session_path, class: "signin-nav" %></li>
+                    <li style="float: right;"><%= link_to "Sign Up", sign_up_path, class:"signup-nav" %></li>
+                    <li style="float: right;"><%= link_to "Sign In", login_path, class: "signin-nav" %></li>
                 <% else %>
                     <li><%= link_to "My Posts", "/users/#{current_user.id}/my_posts", class: "my-posts-nav" unless current_page?(:authenticated_root)%></li>
-                    <li style="float: right;"><%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "signout-nav" %></li>
-                    <li style="float: right;"><%= link_to "Edit Profile", edit_user_registration_path, class: "edit-profile-nav" %></li>
+                    <li style="float: right;"><%= link_to "Sign Out", logout_path, method: :delete, class: "signout-nav" %></li>
+                    <li style="float: right;"><%= link_to "Edit Profile", edit_profile_path, class: "edit-profile-nav" %></li>
                 <% end %>
             </ul>
         </nav>

@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
 
-  devise_for :users
+  	get "sign_up", to: "users#new", as: :sign_up
+	post "sign_up", to: "users#create"
+	get "login", to: "sessions#new", as: :login
+	post "login", to: "sessions#create"
+	delete "logout", to: "sessions#destroy", as: :logout
+	get "edit_profile", to: "sessions#edit", as: :edit_profile
+	patch "edit_profile", to: "sessions#update"
+
 	resources :posts do
 		resources :likes
 		resources :comments
@@ -13,16 +20,8 @@ Rails.application.routes.draw do
 
   	get 'welcome/index'
 	get 'users/:user_id/my_posts', to: 'posts#my_posts'
-  	
-	devise_scope :user do
-		authenticated :user do
-			root 'welcome#index', as: :authenticated_root
-		end
-		
-		unauthenticated do
-			root 'devise/sessions#new', as: :unauthenticated_root
-		end
-	end
+
+	root 'welcome#index', as: :authenticated_root
 
 	get '*path', to: 'application#page_not_found'
 end
