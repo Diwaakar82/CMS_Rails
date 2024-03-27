@@ -8,7 +8,7 @@
 
 <div class="post-container">
   <% @posts.each do |post| %>
-    <% if !current_user.nil? && post.user_id != current_user.id %>
+    <% if (!current_user.nil? && post.user_id != current_user.id) || current_user.nil? %>
       <div class="post">
         <div class="post-title"><%= post.title %></div>
         <div class="post-description"><%= post.description %></div>
@@ -16,14 +16,17 @@
 
         <div class="post-actions">
           <%= link_to 'Show', post_path(post) %>
-          <div class="like-button">
-            <% pre_like = post.likes.find { |like| like.user_id == current_user.id} %>
-            <% if pre_like %>
-              <%= button_to 'Unlike', post_like_path(post, pre_like), method: :delete %>
-            <% else %>
-              <%= button_to 'Like', post_likes_path(post), method: :post %>
-            <% end %>
-          </div>
+
+          <% if user_signed_in? %>
+            <div class="like-button">
+              <% pre_like = post.likes.find { |like| like.user_id == current_user.id} %>
+              <% if pre_like %>
+                <%= button_to 'Unlike', post_like_path(post, pre_like), method: :delete %>
+              <% else %>
+                <%= button_to 'Like', post_likes_path(post), method: :post %>
+              <% end %>
+            </div>
+          <% end %>
         </div>
       </div>
     <% end %>

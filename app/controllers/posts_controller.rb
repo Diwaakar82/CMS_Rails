@@ -41,7 +41,7 @@ class PostsController < ApplicationController
     def destroy
         @post.destroy
 
-        redirect_to posts_path
+        redirect_to request.referer.present? ? request.referer : posts_path
     end
 
     def my_posts
@@ -49,8 +49,8 @@ class PostsController < ApplicationController
     end
 
     def correct_user
-        @post = current_user.posts.find_by(id: params[:id])
-        redirect_to posts_path, notice: "Not authorized" if @post.nil?
+        @post = current_user.posts.find_by(id: params[:id]) unless current_user.nil?
+        redirect_to request.referer.present? ? request.referer : posts_path, notice: "Not authorized" if @post.nil?
     end
 
 private
