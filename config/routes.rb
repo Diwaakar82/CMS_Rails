@@ -5,8 +5,8 @@ Rails.application.routes.draw do
 	get "login", to: "sessions#new", as: :login
 	post "login", to: "sessions#create"
 	delete "logout", to: "sessions#destroy", as: :logout
-	get "edit_profile", to: "sessions#edit", as: :edit_profile
-	patch "edit_profile", to: "sessions#update"
+	get "edit_profile", to: "users#edit"
+	patch "edit_profile", to: "users#update"
 
 	resources :posts do
 		resources :likes
